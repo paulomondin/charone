@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>$CHARON — Cross the river</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: mythic and calm on top, precise machinery underneath
+   IDEA: a ferry ticket / obol for the crossing to Elysium
+   PICTURE: the mosaic coin floating over a living river of light
+   COLOUR and TYPE: abyss green, river teal, bone cream; Cinzel + Space Grotesk
+   LAYOUT: poster hero, spec strip, legend scroll, river route, token ticket, community */
+:root{color-scheme:dark;--bg:#04150f;--bg2:#072019;--deep:#0a2c23;--teal:#23b3a2;--mint:#6fe3cf;--bone:#efe2c4;--ink:#e9efe9;--mute:#9fb8ae;--line:rgba(111,227,207,.18)}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Space Grotesk",system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+h1,h2,h3{font-family:Cinzel,serif;color:var(--bone);margin:0;line-height:1.05;text-wrap:balance}
+h2{font-size:clamp(30px,4.4vw,48px);margin-bottom:18px}
+.band{padding:clamp(48px,7vw,110px) max(5vw,16px);position:relative}
+.wrap{max-width:1240px;margin:0 auto}
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;padding:12px max(5vw,16px);background:rgba(4,21,15,.78);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .brand{display:flex;align-items:center;gap:10px;font-family:Cinzel;font-weight:700;color:var(--bone);text-decoration:none;letter-spacing:.04em}
+nav .brand img{width:34px;height:34px;border-radius:50%}
+nav .links{display:flex;gap:22px;margin-left:auto;font-size:15px}
+nav .links a{text-decoration:none;color:var(--mute)}nav .links a:hover{color:var(--mint)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;font:500 16px "Space Grotesk";text-decoration:none;cursor:pointer;border:1px solid var(--mint);background:transparent;color:var(--mint);transition:.2s}
+.btn.solid{background:var(--mint);color:#03231b;border-color:var(--mint)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(111,227,207,.25)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offset:3px}
+#river{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero{min-height:calc(100vh - 60px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:40px;overflow:hidden;background:radial-gradient(ellipse at 70% 40%,#0d3a2e 0%,var(--bg) 60%)}
+.hero .txt{position:relative;z-index:2}
+.kick{color:var(--mint);font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.kick i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);animation:pulse 1.6s infinite}
+.hero h1{font-size:clamp(56px,9vw,120px);font-weight:900;letter-spacing:.02em}
+.hero h1 span{color:var(--teal)}
+.slogan{font-family:Cinzel;font-size:clamp(20px,2.4vw,28px);color:var(--bone);margin:14px 0 18px;min-height:1.3em}
+.slogan .cur{display:inline-block;width:2px;height:1em;background:var(--mint);vertical-align:-2px;margin-left:4px;animation:blink 1s steps(1) infinite}
+.lead{color:var(--mute);max-width:46ch;font-size:17px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0}
+.ca{display:flex;align-items:center;gap:10px;max-width:480px;padding:8px 8px 8px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(7,32,25,.7);font-size:14px}
+.ca code{flex:1;color:var(--bone);overflow-wrap:anywhere}
+.ca button{min-height:38px;padding:0 14px;border-radius:10px;border:0;background:var(--deep);color:var(--mint);font:500 14px "Space Grotesk";cursor:pointer}
+.coin{position:relative;z-index:2;justify-self:center;width:min(520px,88%);aspect-ratio:1}
+.coin img{position:absolute;inset:8%;width:84%;height:84%;border-radius:50%;box-shadow:0 0 90px rgba(35,179,162,.35),0 30px 60px rgba(0,0,0,.6);animation:float 6s ease-in-out infinite}
+.coin svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 60s linear infinite}
+.coin .obol{animation:spin 14s linear infinite reverse}
+.spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line);background:var(--bg2)}
+.spec div{padding:22px max(2vw,14px);border-inline-end:1px solid var(--line)}
+.spec div:last-child{border:0}
+.spec b{display:block;font:700 clamp(22px,3vw,34px) "Space Grotesk";color:var(--mint);white-space:nowrap}
+.spec span{color:var(--mute);font-size:14px}
+.marquee{overflow:hidden;white-space:nowrap;border-bottom:1px solid var(--line);padding:14px 0;font-family:Cinzel;color:var(--teal);font-size:18px}
+.marquee div{display:inline-block;animation:slide 30s linear infinite}
+.legend{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px);align-items:start}
+.legend img{width:100%;border-radius:24px;position:sticky;top:100px;opacity:.95}
+.scroll-txt p{font-size:clamp(18px,1.8vw,22px);color:var(--ink);margin:0 0 26px;opacity:.15;transform:translateY(16px);transition:1s}
+.scroll-txt p.on{opacity:1;transform:none}
+.scroll-txt p.big{font-family:Cinzel;color:var(--bone);font-size:clamp(24px,2.8vw,34px);line-height:1.2}
+.scroll-txt em{color:var(--mint);font-style:normal}
+.route{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:40px}
+.route:before{content:"";position:absolute;top:34px;left:6%;right:6%;height:2px;background:repeating-linear-gradient(90deg,var(--mint) 0 10px,transparent 10px 20px);animation:flow 1.2s linear infinite;opacity:.6}
+.step{position:relative;padding-top:84px}
+.step .n{position:absolute;top:0;left:0;width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:var(--bg2);border:1px solid var(--mint);font:700 22px Cinzel;color:var(--bone)}
+.step h3{font-size:21px;margin-bottom:8px}
+.step p{color:var(--mute);margin:0;font-size:15.5px}
+.ticket{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);border:1px solid var(--line);border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#0b3127,#061a14)}
+.ticket .l{padding:clamp(26px,4vw,50px);border-inline-end:2px dashed var(--line)}
+.ticket .r{padding:clamp(26px,4vw,50px)}
+.ticket dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 24px}
+.ticket dt{color:var(--mute)}.ticket dd{margin:0;text-align:right;color:var(--bone);font-weight:500}
+.note{font-size:13px;color:var(--mute);margin-top:18px}
+.pillars{display:grid;gap:16px}
+.pillars div{padding:18px 20px;border-radius:16px;background:rgba(111,227,207,.06);border:1px solid var(--line)}
+.pillars b{color:var(--mint);font-family:Cinzel;font-size:18px;display:block;margin-bottom:4px}
+.pillars span{color:var(--mute);font-size:15px}
+.comm{text-align:center;background:radial-gradient(ellipse at 50% 100%,#0d3a2e,var(--bg) 70%);overflow:hidden}
+.comm h2{font-size:clamp(36px,6vw,72px)}
+.comm .cta{justify-content:center}
+footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--mute);font-size:13px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:var(--mint);color:#03231b;padding:10px 18px;border-radius:999px;font-weight:500;transition:.3s;z-index:50}
+.toast.on{transform:translate(-50%,0)}
+.track{position:relative;height:170px;margin-top:34px}
+.track>svg{position:absolute;inset:0;width:100%;height:100%}
+.boat{position:absolute;bottom:44px;width:84px;transform:translateX(-50%);transition:left 2.4s cubic-bezier(.3,.8,.3,1);animation:bob 3.2s ease-in-out infinite}
+.gate{position:absolute;right:1.5%;bottom:62px;width:54px}
+.status{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;margin-top:6px}
+.status b{font:700 clamp(26px,3.4vw,40px) "Space Grotesk";color:var(--mint);white-space:nowrap}
+.status span{color:var(--mute)}
+.marks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:18px}
+.mark{border-top:2px solid var(--line);padding-top:10px}
+.mark.done{border-color:var(--mint)}
+.mark b{display:block;color:var(--bone);font-family:Cinzel;font-size:16px}
+.mark span{color:var(--mute);font-size:14px;white-space:nowrap}
+.hoodgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,70px);align-items:center}
+.pfp canvas{width:100%;max-width:460px;aspect-ratio:1;display:block;margin:0 auto;border-radius:50%;touch-action:none;cursor:grab;box-shadow:0 0 70px rgba(35,179,162,.25)}
+.ctrl{display:grid;gap:16px;margin:24px 0;max-width:420px}
+.ctrl label{display:flex;align-items:center;gap:14px;color:var(--mute)}
+.ctrl input[type=range]{flex:1;accent-color:var(--mint);height:44px}
+.ctrl input[type=checkbox]{width:22px;height:22px;accent-color:var(--mint)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.vh:focus-visible+label{outline:2px solid var(--bone);outline-offset:3px}
+#outWrap{display:none;text-align:center;margin-top:20px}
+#outWrap img{width:180px;border-radius:50%}
+@keyframes bob{50%{transform:translate(-50%,-6px) rotate(-2deg)}}
+@keyframes float{50%{transform:translateY(-14px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{opacity:.3}}
+@keyframes blink{50%{opacity:0}}
+@keyframes slide{to{transform:translateX(-50%)}}
+@keyframes flow{to{background-position:20px 0}}
+@media(max-width:860px){nav .links{display:none}.hero{grid-template-columns:1fr;text-align:left;padding-top:30px}.coin{order:-1;width:min(380px,80%)}.legend,.ticket{grid-template-columns:1fr}.legend img{position:static;max-width:420px}.ticket .l{border-inline-end:0;border-bottom:2px dashed var(--line)}.hoodgrid{grid-template-columns:1fr}.marks{grid-template-columns:repeat(2,minmax(0,1fr))}.route{grid-template-columns:repeat(2,minmax(0,1fr))}.route:before{display:none}.spec{grid-template-columns:repeat(2,minmax(0,1fr))}.spec div:nth-child(2){border-inline-end:0}.spec div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(max-width:520px){.route{grid-template-columns:1fr}nav .btn{display:none}}
+@media(prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}.scroll-txt p{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="#top"><img src="logo.jpg" alt="">$CHARON</a>
+  <div class="links"><a href="#legend">Legend</a><a href="#journey">Journey</a><a href="#crossing">How to buy</a><a href="#token">Token</a><a href="#hood">Hood your PFP</a></div>
+  <a class="btn solid" href="#crossing">Board the ferry</a>
+</nav>
+
+<header class="band hero" id="top">
+  <canvas id="river"></canvas>
+  <div class="txt">
+    <div class="kick"><i></i>Live on Elysium · Hyperliquid L2</div>
+    <h1><span>$</span>CHARON</h1>
+    <div class="slogan" id="slogan"><span class="cur"></span></div>
+    <p class="lead">Before reaching Elysium, there was a river to cross. The ferryman has returned to the helm, and the community is the vessel.</p>
+    <div class="cta">
+      <a class="btn solid" href="#crossing">Cross the river</a>
+      <a class="btn" href="#legend">Read the legend</a>
+    </div>
+    <div class="ca"><span style="color:var(--mute)">CA</span><code id="ca">Contract address coming soon</code><button id="copy" type="button">Copy</button></div>
+  </div>
+  <div class="coin" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="98" fill="none" stroke="#6fe3cf" stroke-opacity=".35" stroke-dasharray="1 5"/><circle cx="100" cy="100" r="93" fill="none" stroke="#efe2c4" stroke-opacity=".15"/></svg>
+    <svg class="obol" viewBox="0 0 200 200"><circle cx="100" cy="4" r="4" fill="#efe2c4"/><circle cx="100" cy="196" r="2.5" fill="#6fe3cf"/></svg>
+    <img src="logo.jpg" alt="$CHARON coin: the ferryman rowing toward the gate of Elysium">
+  </div>
+</header>
+
+<section class="spec" aria-label="Network">
+  <div><b>Elysium</b><span>Hyperliquid Layer 2</span></div>
+  <div><b>100 ms</b><span>Block time</span></div>
+  <div><b>HYPE</b><span>Gas token</span></div>
+  <div><b>99901</b><span>Chain ID</span></div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div id="mq"></div></div>
+
+<section class="band" id="legend">
+  <div class="wrap legend">
+    <img src="logo.jpg" alt="">
+    <div>
+      <h2>The legend of $CHARON</h2>
+      <div class="scroll-txt">
+        <p class="big">Before reaching Elysium, there was a river to cross.</p>
+        <p>In mythology, Charon ferried travelers from one shore to the other. Now, at a new onchain frontier, he returns to the helm.</p>
+        <p>The river is <em>the unknown</em>; the vessel is <em>the community</em>; and everyone who joins the journey helps write the legend.</p>
+        <p>The ancient obol, the coin for the crossing, takes a new form in $CHARON. Not as a promise of riches, but as a symbol of those who set sail for Elysium.</p>
+        <p class="big">One shore behind. The crossing begins now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="journey" style="background:var(--bg2)">
+  <div class="wrap">
+    <h2>The journey across the Styx</h2>
+    <div class="status"><b id="mcap">Docked</b><span id="next">The ferry leaves at launch.</span></div>
+    <div class="track" aria-hidden="true">
+      <svg viewBox="0 0 1000 170" preserveAspectRatio="none">
+        <rect x="0" y="100" width="1000" height="70" fill="#0b3a30"/>
+        <path d="M0 100 Q50 92 100 100 T200 100 T300 100 T400 100 T500 100 T600 100 T700 100 T800 100 T900 100 T1000 100" fill="none" stroke="#6fe3cf" stroke-width="2" opacity=".7"/>
+        <path d="M0 125 Q60 117 120 125 T240 125 T360 125 T480 125 T600 125 T720 125 T840 125 T960 125" fill="none" stroke="#23b3a2" stroke-width="2" opacity=".5"/>
+        <path d="M0 150 Q70 142 140 150 T280 150 T420 150 T560 150 T700 150 T840 150 T980 150" fill="none" stroke="#23b3a2" stroke-width="2" opacity=".3"/>
+        <polygon points="0,170 0,80 50,84 80,104 70,170" fill="#163a35"/>
+        <polygon points="930,170 920,104 950,84 1000,80 1000,170" fill="#d9c9a2"/>
+      </svg>
+      <svg class="gate" viewBox="0 0 54 60"><rect x="2" y="12" width="12" height="48" fill="#efe2c4"/><rect x="40" y="12" width="12" height="48" fill="#efe2c4"/><path d="M2 14 Q27 -8 52 14 L42 16 Q27 2 12 16 Z" fill="#efe2c4"/><rect x="14" y="16" width="26" height="44" fill="#f5c55b" opacity=".85"/></svg>
+      <svg class="boat" id="boat" style="left:6%" viewBox="0 0 84 70"><path d="M30 20 Q34 4 40 2 Q47 6 48 22 L50 50 L28 50 Z" fill="#efe2c4"/><circle cx="37" cy="14" r="1.6" fill="#6fe3cf"/><circle cx="42" cy="14" r="1.6" fill="#6fe3cf"/><line x1="56" y1="12" x2="44" y2="68" stroke="#c9b98a" stroke-width="3" stroke-linecap="round"/><path d="M2 46 Q4 40 8 44 L78 44 Q82 40 84 46 Q72 62 42 62 Q12 62 2 46 Z" fill="#d9c9a2"/><circle cx="62" cy="52" r="4" fill="#f5c55b"/><rect x="76" y="46" width="6" height="8" rx="1" fill="#6fe3cf"/></svg>
+    </div>
+    <div class="marks" id="marks"></div>
+  </div>
+</section>
+
+<section class="band" id="crossing">
+  <div class="wrap">
+    <h2>The crossing</h2>
+    <p class="lead">Four steps from this shore to the other.</p>
+    <div class="route">
+      <div class="step"><div class="n">I</div><h3>Get HYPE</h3><p>Buy HYPE on Hyperliquid or any exchange that lists it. It is the gas of Elysium.</p></div>
+      <div class="step"><div class="n">II</div><h3>Bridge to Elysium</h3><p>Move HYPE to HyperEVM, then to Elysium (chain ID 99901). Use a plain, fresh wallet.</p></div>
+      <div class="step"><div class="n">III</div><h3>Pay the obol</h3><p>Swap HYPE for $CHARON using the official contract address above. Check it twice.</p></div>
+      <div class="step"><div class="n">IV</div><h3>Join the crew</h3><p>Board the community on X and Telegram, and help write the legend.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="token">
+  <div class="wrap">
+    <h2>The ferry ticket</h2>
+    <div class="ticket">
+      <div class="l">
+        <dl>
+          <dt>Ticker</dt><dd>$CHARON</dd>
+          <dt>Network</dt><dd>Elysium</dd>
+          <dt>Pair</dt><dd>HYPE</dd>
+          <dt>Total supply</dt><dd>To be announced</dd>
+          <dt>Trade fee</dt><dd>To be announced</dd>
+          <dt>Contract</dt><dd>Coming soon</dd>
+        </dl>
+        <p class="note">Figures are published at launch. Always confirm the contract address from official channels.</p>
+      </div>
+      <div class="r pillars">
+        <div><b>The river</b><span>A new frontier: Elysium runs at 100 ms blocks inside the Hyperliquid ecosystem.</span></div>
+        <div><b>The vessel</b><span>No team promises, no roadmap theatre. The community carries the token.</span></div>
+        <div><b>The obol</b><span>A symbol of the crossing, held by those who set sail.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="hood" style="background:var(--bg2)">
+  <div class="wrap hoodgrid">
+    <div>
+      <h2>Hood your PFP</h2>
+      <p class="lead">Upload a photo, put on the ferryman's hood and become a passenger. Every hooded profile is one more soul aboard.</p>
+      <div class="ctrl">
+        <input class="vh" type="file" id="file" accept="image/*"><label class="btn solid" for="file" style="color:#03231b;justify-content:center">Upload photo</label>
+        <label>Zoom <input type="range" id="zoom" min="0.6" max="4" step="0.01" value="1.3"></label>
+        <label><input type="checkbox" id="eyes" checked> Charon eyes (face in shadow)</label>
+        <label><input type="checkbox" id="tint" checked> Styx tint (teal duotone)</label>
+        <button class="btn" type="button" id="get">Get my hooded PFP</button>
+      </div>
+      <p class="note">Drag and zoom until your eyes sit inside the two dashed circles; the guides do not appear in the final image. Your photo stays on your device.</p>
+    </div>
+    <div class="pfp">
+      <canvas id="pfp" width="800" height="800" aria-label="Hooded profile picture preview"></canvas>
+      <div id="outWrap"><img id="out" alt="Your hooded profile picture"><p class="note">Press and hold the image (or right-click) to save it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band comm" id="community">
+  <div class="wrap">
+    <h2>Cross the river.<br>Find Elysium.</h2>
+    <p class="lead" style="margin:0 auto">The ferry leaves with whoever is aboard.</p>
+    <div class="cta">
+      <a class="btn solid" href="#">X / Twitter</a>
+      <a class="btn" href="#">Telegram</a>
+      <a class="btn" href="#">Chart</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>$CHARON is a community memecoin with no intrinsic value and no expectation of financial return. Crypto is volatile; only use what you can afford to lose.</span>
+  <span>© $CHARON</span>
+</footer>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+{
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const slogan=document.getElementById('slogan'),text='Cross the river. Find Elysium.';
+let i=0;const cur=slogan.querySelector('.cur');
+const type=()=>{if(i<=text.length){slogan.firstChild.nodeType===3?slogan.firstChild.textContent=text.slice(0,i):slogan.insertBefore(document.createTextNode(text.slice(0,i)),cur);i++;setTimeout(type,i<3?400:55)}};
+reduce?slogan.insertBefore(document.createTextNode(text),cur):type();
+
+document.getElementById('mq').textContent=Array(12).fill('Cross the river  ·  Find Elysium  ·  Pay the obol  ·  ').join('');
+
+const toast=document.getElementById('toast');
+document.getElementById('copy').addEventListener('click',async()=>{
+  const v=document.getElementById('ca').textContent;
+  try{await navigator.clipboard.writeText(v);toast.textContent='Copied'}catch(e){toast.textContent='Copy not available here'}
+  toast.classList.add('on');setTimeout(()=>toast.classList.remove('on'),1600);
+});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.4});
+document.querySelectorAll('.scroll-txt p').forEach(p=>io.observe(p));
+
+const cv=document.getElementById('river'),ctx=cv.getContext('2d');
+let W,H,dpr;const souls=[];
+const size=()=>{dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)};
+const ro=new ResizeObserver(size);ro.observe(cv);size();
+for(let k=0;k<70;k++)souls.push({x:Math.random(),y:.55+Math.random()*.45,s:.0003+Math.random()*.0009,r:.6+Math.random()*1.8,p:Math.random()*6});
+const layers=[{c:'rgba(35,179,162,.55)',a:14,f:.008,v:.6,y:.78},{c:'rgba(111,227,207,.35)',a:10,f:.012,v:-.9,y:.84},{c:'rgba(239,226,196,.22)',a:8,f:.006,v:.4,y:.9},{c:'rgba(35,179,162,.25)',a:18,f:.004,v:.3,y:.96}];
+let t=0;
+const draw=()=>{
+  ctx.clearRect(0,0,W,H);
+  layers.forEach(L=>{ctx.beginPath();for(let x=0;x<=W;x+=8){const y=H*L.y+Math.sin(x*L.f+t*L.v)*L.a+Math.sin(x*L.f*2.3-t*L.v*.7)*L.a*.4;x?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.strokeStyle=L.c;ctx.lineWidth=1.5;ctx.stroke()});
+  souls.forEach(s=>{s.x+=s.s;if(s.x>1.02)s.x=-.02;const y=s.y*H+Math.sin(t*2+s.p)*4;ctx.beginPath();ctx.arc(s.x*W,y,s.r,0,7);ctx.fillStyle='rgba(111,227,207,'+(.25+.5*Math.abs(Math.sin(t+s.p)))+')';ctx.fill()});
+  t+=.016;if(!reduce)requestAnimationFrame(draw);
+};
+draw();
+
+/* CONFIG: fill CA after launch. On your own hosting the market cap is read live from DexScreener;
+   MANUAL_MCAP is the fallback (in USD) when the live read is not available. */
+const CA='';
+const MANUAL_MCAP=0;
+const stops=[{v:1e5,n:'Leaving the shore'},{v:5e5,n:'Into the mist'},{v:1e6,n:'Mid-river'},{v:5e6,n:'The far shore'},{v:1e7,n:'Gates of Elysium'}];
+const fmt=v=>v>=1e6?'$'+(v/1e6).toFixed(v>=1e7?0:1)+'M':'$'+Math.round(v/1e3)+'K';
+const setMcap=m=>{
+  let pos=0;
+  if(m>0){const pts=[0,...stops.map(s=>s.v)];for(let k=0;k<pts.length-1;k++){if(m>=pts[k+1]){pos=k+1;continue}pos=k+(m-pts[k])/(pts[k+1]-pts[k]);break}}
+  pos=Math.min(pos,stops.length)/stops.length;
+  document.getElementById('boat').style.left=(6+pos*82)+'%';
+  const nx=stops.find(s=>s.v>m);
+  document.getElementById('mcap').textContent=m>0?fmt(m)+' market cap':'Docked';
+  document.getElementById('next').textContent=m>0?(nx?'Next stop: '+nx.n+' at '+fmt(nx.v):'The gates of Elysium are open.'):'The ferry leaves at launch.';
+  document.getElementById('marks').innerHTML=stops.map(s=>'<div class="mark'+(m>=s.v?' done':'')+'"><b>'+s.n+'</b><span>'+fmt(s.v)+'</span></div>').join('');
+};
+setMcap(MANUAL_MCAP);
+if(CA)fetch('https://api.dexscreener.com/latest/dex/tokens/'+encodeURIComponent(CA)).then(r=>r.json()).then(d=>{const p=(d.pairs||[]).sort((a,b)=>(b.liquidity?.usd||0)-(a.liquidity?.usd||0))[0];const v=Number(p&&(p.marketCap||p.fdv));if(v>0)setMcap(v)}).catch(()=>{});
+
+const C=document.getElementById('pfp'),X=C.getContext('2d'),S=800;
+let src=null,tinted=null,zoom=1.3,ox=0,oy=0,eyes=true,tint=true;
+const EY=418,ED=50;
+const mix=(a,b,t)=>a+(b-a)*t;
+const ramp=[[3,20,15],[14,78,66],[42,170,152],[205,248,236]];
+const duo=im=>{
+  const k=Math.min(1,1000/Math.max(im.width,im.height)),w=Math.round(im.width*k),h=Math.round(im.height*k);
+  const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.drawImage(im,0,0,w,h);
+  const d=x.getImageData(0,0,w,h),p=d.data;
+  const hist=new Uint32Array(256);for(let i=0;i<p.length;i+=4)hist[Math.round(p[i]*.3+p[i+1]*.59+p[i+2]*.11)]++;
+  const n=p.length/4;let lo=0,hi=255,acc=0;for(let v=0;v<256;v++){acc+=hist[v];if(acc>n*.02){lo=v;break}}acc=0;for(let v=255;v>=0;v--){acc+=hist[v];if(acc>n*.02){hi=v;break}}
+  const span=Math.max(30,hi-lo);
+  for(let i=0;i<p.length;i+=4){let l=((p[i]*.3+p[i+1]*.59+p[i+2]*.11)-lo)/span;l=Math.min(1,Math.max(0,l))**.85;const s=l*3,j=Math.min(2,Math.floor(s)),t=s-j;for(let q=0;q<3;q++)p[i+q]=mix(ramp[j][q],ramp[j+1][q],t)}
+  x.putImageData(d,0,0);return c;
+};
+const hood=new Path2D();
+hood.moveTo(0,820);hood.bezierCurveTo(0,470,120,120,400,52);hood.bezierCurveTo(680,120,800,470,800,820);hood.closePath();
+const OX=400,OYc=448,RX=168,RY=222;
+hood.moveTo(OX+RX,OYc);hood.ellipse(OX,OYc,RX,RY,0,0,Math.PI*2);
+const render=guide=>{
+  X.setTransform(1,0,0,1,0,0);
+  const bg=X.createRadialGradient(400,380,60,400,400,420);bg.addColorStop(0,'#0f4a3f');bg.addColorStop(1,'#03120d');
+  X.fillStyle=bg;X.fillRect(0,0,S,S);
+  X.save();X.beginPath();X.arc(400,400,368,0,7);X.clip();
+  const im=tint?tinted:src;
+  X.save();X.beginPath();X.ellipse(OX,OYc,RX+2,RY+2,0,0,7);X.clip();
+  if(im){const sc=Math.max(RX*2/im.width,RY*2/im.height)*zoom,w=im.width*sc,h=im.height*sc;X.drawImage(im,400-w/2+ox,OYc-h/2+oy,w,h)}
+  else{X.fillStyle='#04110d';X.fillRect(0,0,S,S)}
+  X.restore();
+  X.save();X.beginPath();X.ellipse(OX,OYc,RX,RY,0,0,7);X.clip();
+  const g=X.createLinearGradient(0,OYc-RY,0,OYc+RY);
+  g.addColorStop(0,'rgba(1,8,6,.95)');g.addColorStop(.28,eyes?'rgba(1,8,6,.8)':'rgba(1,8,6,.35)');g.addColorStop(.55,eyes?'rgba(1,8,6,.5)':'rgba(1,8,6,0)');g.addColorStop(1,eyes?'rgba(1,8,6,.35)':'rgba(1,8,6,0)');
+  X.fillStyle=g;X.fillRect(0,0,S,S);
+  const v=X.createRadialGradient(OX,OYc,RX*.55,OX,OYc,RY*1.02);v.addColorStop(0,'rgba(1,8,6,0)');v.addColorStop(1,'rgba(1,8,6,.6)');
+  X.fillStyle=v;X.fillRect(0,0,S,S);X.restore();
+  X.save();X.shadowColor='rgba(0,0,0,.7)';X.shadowBlur=40;
+  const cl=X.createLinearGradient(80,0,720,0);cl.addColorStop(0,'#0e463b');cl.addColorStop(.5,'#0a3329');cl.addColorStop(1,'#041a14');
+  X.fillStyle=cl;X.fill(hood,'evenodd');X.restore();
+  X.save();X.clip(hood,'evenodd');
+  X.lineCap='round';
+  [[400,70,300,820,.07],[360,90,120,820,.08],[440,90,690,820,.05],[250,220,60,820,.06]].forEach(([a,b,c,d,o])=>{X.strokeStyle='rgba(111,227,207,'+o+')';X.lineWidth=26;X.beginPath();X.moveTo(a,b);X.quadraticCurveTo((a+c)/2+(c>a?30:-30),(b+d)/2,c,d);X.stroke()});
+  const lit=X.createRadialGradient(250,250,40,250,250,520);lit.addColorStop(0,'rgba(111,227,207,.14)');lit.addColorStop(1,'rgba(0,0,0,.25)');
+  X.fillStyle=lit;X.fillRect(0,0,S,S);X.restore();
+  const N=64;
+  for(let k=0;k<N;k++){const a=k/N*Math.PI*2,px=OX+Math.cos(a)*(RX+12),py=OYc+Math.sin(a)*(RY+12);
+    X.save();X.translate(px,py);X.rotate(Math.atan2(Math.cos(a)*RY,-Math.sin(a)*RX));
+    X.fillStyle=['#efe2c4','#e2d3ae','#f5ecd6'][k%3];X.beginPath();X.roundRect(-11,-8,22,16,3);X.fill();
+    X.fillStyle='rgba(120,100,60,.35)';X.fillRect(-1,-8,2,16);X.restore()}
+  if(eyes){X.save();X.shadowColor='#6fe3cf';X.shadowBlur=40;X.fillStyle='#d8fff6';
+    for(let k=0;k<3;k++){X.beginPath();X.ellipse(OX-ED,EY,15,9,0,0,7);X.ellipse(OX+ED,EY,15,9,0,0,7);X.fill()}X.restore()}
+  X.restore();
+  const T=84;
+  for(let k=0;k<T;k++){const a=k/T*Math.PI*2;X.save();X.translate(400+Math.cos(a)*384,400+Math.sin(a)*384);X.rotate(a+Math.PI/2);
+    X.fillStyle=['#efe2c4','#e4d6b4','#f6eedb'][k%3];X.beginPath();X.roundRect(-13,-12,26,24,4);X.fill();
+    X.strokeStyle='rgba(150,125,80,.45)';X.lineWidth=1.5;X.beginPath();X.moveTo(-6,-3);X.lineTo(0,1);X.lineTo(6,-3);X.stroke();X.restore()}
+  X.lineWidth=3;X.strokeStyle='#6fe3cf';X.beginPath();X.arc(400,400,369,0,7);X.stroke();
+  if(guide&&src){X.save();X.setLineDash([6,8]);X.strokeStyle='rgba(255,255,255,.7)';X.lineWidth=2;
+    X.beginPath();X.arc(OX-ED,EY,22,0,7);X.stroke();X.beginPath();X.arc(OX+ED,EY,22,0,7);X.stroke();
+    X.beginPath();X.ellipse(OX,OYc+20,120,165,0,0,7);X.stroke();X.restore()}
+};
+render(true);
+document.getElementById('file').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;const im=new Image();
+  im.onload=()=>{src=im;tinted=duo(im);zoom=1.3;ox=0;oy=0;document.getElementById('zoom').value=1.3;render(true)};im.src=URL.createObjectURL(f);
+});
+document.getElementById('zoom').addEventListener('input',e=>{zoom=+e.target.value;render(true)});
+document.getElementById('eyes').addEventListener('change',e=>{eyes=e.target.checked;render(true)});
+document.getElementById('tint').addEventListener('change',e=>{tint=e.target.checked;render(true)});
+let drag=null;
+C.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};C.setPointerCapture(e.pointerId)});
+C.addEventListener('pointermove',e=>{if(!drag)return;const k=S/C.clientWidth;ox+=(e.clientX-drag.x)*k;oy+=(e.clientY-drag.y)*k;drag={x:e.clientX,y:e.clientY};render(true)});
+C.addEventListener('pointerup',()=>drag=null);C.addEventListener('pointercancel',()=>drag=null);
+document.getElementById('get').addEventListener('click',()=>{
+  render(false);const url=C.toDataURL('image/png');render(true);
+  document.getElementById('out').src=url;document.getElementById('outWrap').style.display='block';
+  document.getElementById('outWrap').scrollIntoView({behavior:'smooth',block:'center'});
+  try{const a=document.createElement('a');a.href=url;a.download='charon-pfp.png';document.body.appendChild(a);a.click();a.remove()}catch(e){}
+});
+}
+</script>
+</body>
+</html>
