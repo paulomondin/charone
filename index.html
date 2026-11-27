@@ -136,7 +136,7 @@ footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--m
       <a class="btn solid" href="#crossing">Cross the river</a>
       <a class="btn" href="#legend">Read the legend</a>
     </div>
-    <div class="ca"><span style="color:var(--mute)">CA</span><code id="ca">Contract address coming soon</code><button id="copy" type="button">Copy</button></div>
+    <div class="ca"><span style="color:var(--mute)">CA</span><code id="ca">0xfc7f5b1f6ddefd80e8fa4fd32f86a92ca4f86765</code><button id="copy" type="button">Copy</button></div>
   </div>
   <div class="coin" aria-hidden="true">
     <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="98" fill="none" stroke="#6fe3cf" stroke-opacity=".35" stroke-dasharray="1 5"/><circle cx="100" cy="100" r="93" fill="none" stroke="#efe2c4" stroke-opacity=".15"/></svg>
@@ -212,11 +212,11 @@ footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--m
           <dt>Ticker</dt><dd>$CHARON</dd>
           <dt>Network</dt><dd>Elysium</dd>
           <dt>Pair</dt><dd>HYPE</dd>
-          <dt>Total supply</dt><dd>To be announced</dd>
-          <dt>Trade fee</dt><dd>To be announced</dd>
-          <dt>Contract</dt><dd>Coming soon</dd>
+          <dt>Total supply</dt><dd>1,000,000,000</dd>
+          <dt>Trade fee</dt><dd>1% (0.6% to holders)</dd>
+          <dt>Contract</dt><dd><code style="font-size:13px">0xfc7f…6765</code></dd>
         </dl>
-        <p class="note">Figures are published at launch. Always confirm the contract address from official channels.</p>
+        <p class="note">Launched on Montra. Launch liquidity is locked for good; no owner, mint, tax or pause. Always confirm the contract address from @CharonOnElys.</p>
       </div>
       <div class="r pillars">
         <div><b>The river</b><span>A new frontier: Elysium runs at 100 ms blocks inside the Hyperliquid ecosystem.</span></div>
@@ -254,7 +254,7 @@ footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--m
     <p class="lead" style="margin:0 auto">The ferry leaves with whoever is aboard.</p>
     <div class="cta">
       <a class="btn solid" href="https://x.com/CharonOnElys" target="_blank" rel="noopener">X / Twitter</a>
-      <a class="btn" href="#">Chart</a>
+      <a class="btn" href="https://dexscreener.com/search?q=0xfc7f5b1f6ddefd80e8fa4fd32f86a92ca4f86765" target="_blank" rel="noopener">Chart</a>
     </div>
   </div>
 </section>
@@ -302,7 +302,7 @@ draw();
 
 /* CONFIG: fill CA after launch. On your own hosting the market cap is read live from DexScreener;
    MANUAL_MCAP is the fallback (in USD) when the live read is not available. */
-const CA='';
+const CA='0xfc7f5b1f6ddefd80e8fa4fd32f86a92ca4f86765';
 const MANUAL_MCAP=0;
 const stops=[{v:1e5,n:'Leaving the shore'},{v:5e5,n:'Into the mist'},{v:1e6,n:'Mid-river'},{v:5e6,n:'The far shore'},{v:1e7,n:'Gates of Elysium'}];
 const fmt=v=>v>=1e6?'$'+(v/1e6).toFixed(v>=1e7?0:1)+'M':'$'+Math.round(v/1e3)+'K';
